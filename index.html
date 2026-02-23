@@ -525,6 +525,32 @@
     const nightSection = document.getElementById('night');
     const flashlight = document.getElementById('flashlight');
 
+    // 0. Remove Intro Overlay After Page Load
+    window.addEventListener('load', () => {
+      const introOverlay = document.querySelector('.intro-overlay');
+      const introLogo = document.querySelector('.intro-logo');
+      
+      if (introOverlay && introLogo) {
+        // Animate logo scale up
+        setTimeout(() => {
+          introLogo.style.transition = 'transform 0.8s ease-out, opacity 0.6s ease-out';
+          introLogo.style.transform = 'scale(1.2)';
+          introLogo.style.opacity = '0';
+        }, 300);
+        
+        // Fade out overlay
+        setTimeout(() => {
+          introOverlay.style.transition = 'opacity 0.8s ease-out';
+          introOverlay.style.opacity = '0';
+        }, 800);
+        
+        // Remove from DOM
+        setTimeout(() => {
+          introOverlay.remove();
+        }, 1800);
+      }
+    });
+
     // 1. Reveal Animations & BG Change
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
